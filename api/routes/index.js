@@ -1,0 +1,24 @@
+import express from "express";
+import auth from "./Auth/route.js";
+import asset from "./Assets/route.js";
+import inventory from "./Inventories/route.js";
+import document from "./Documents/route.js";
+import reading from "./Readings/route.js";
+import materialTransfer from "./MaterialTransfer/route.js";
+import customField from "./CustomFields/route.js";
+import workOrder from "./WorkOrder/route.js";
+import { dashboard, getWorkOrdersSchedule } from "../controllers/Shared/dashboardController.js";
+import { bearerAuth } from "../middlewares/authMiddleware.js";
+const router = express.Router();
+
+router.use("/auth", auth);
+router.use("/asset", asset);
+router.use("/inventory", inventory);
+router.use("/document", document);
+router.use("/readings", reading);
+router.use("/material-transfer", materialTransfer);
+router.use("/fields", customField);
+router.use("/work-orders", workOrder);
+router.get("/dashboard/get", bearerAuth, dashboard);
+router.get("/dashboard/schedule", getWorkOrdersSchedule);
+export default router;
